@@ -8,9 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>测试随机响应时间</title>
+    <title>Title</title>
 </head>
 <body>
+
+<table>
+    <tr>
+        <td>测试随机响应时间</td>
+    </tr>
+</table>
+
 
 </body>
 </html>
