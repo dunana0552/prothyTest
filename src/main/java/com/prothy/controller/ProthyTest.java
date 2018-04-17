@@ -28,16 +28,16 @@ public class ProthyTest implements Runnable  {
 
 
     @RequestMapping(value = "/prothyTest",method = RequestMethod.POST)
-    public String prothyTest(HttpServletRequest request) {
-
-        String requestTime = request.getParameter("requestTime");
-        String randomTime = request.getParameter("randomTime");
+    public String prothyTest(@RequestParam("requestTime") String requestTime,@RequestParam("randomTime") String randomTime) {
+//
+//        String requestTime = request.getParameter("requestTime");
+//        String randomTime = request.getParameter("randomTime");
         ProthyTest prothyTest = new ProthyTest();
 
 
         if (randomTime.equals("0")) {
             prothyTest.run(randomTime);
-            return "second";
+            return "third";
 
         } else if (!requestTime.equals(0)) {
             prothyTest.run(requestTime);
