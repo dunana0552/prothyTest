@@ -1,9 +1,7 @@
 package com.prothy.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 
@@ -11,24 +9,24 @@ import java.util.Random;
  * Created by dunana on 18/4/13.
  */
 @Controller
-public class ProthyTest implements Runnable  {
+public class ProthyTest implements Runnable {
 
-    public ProthyTest(){
-
-    }
-
-
-
-    @RequestMapping(value = "/prothy",method = RequestMethod.GET)
-    public String index(){
-
-            return "test";
+    public ProthyTest() {
 
     }
 
+    public void run() {
+    }
 
-    @RequestMapping(value = "/prothyTest",method = RequestMethod.POST)
-    public String prothyTest(@RequestParam("requestTime") String requestTime,@RequestParam("randomTime") String randomTime) {
+    @RequestMapping(value = "/prothy", method = RequestMethod.GET)
+    public String index() {
+
+        return "test";
+
+    }
+
+    @RequestMapping(value = "/prothyTest", method = RequestMethod.POST)
+    public String prothyTest(@RequestParam("requestTime") String requestTime, @RequestParam("randomTime") String randomTime) {
 //
 //        String requestTime = request.getParameter("requestTime");
 //        String randomTime = request.getParameter("randomTime");
@@ -47,22 +45,22 @@ public class ProthyTest implements Runnable  {
         return "";
     }
 
-    public void run(String a){
+    public void run(String a) {
 
-        Random random=new Random();
-        int i=random.nextInt(10);
+        Random random = new Random();
+        int i = random.nextInt(10);
 
-        if(a.equals("0")) {
+        if (a.equals("0")) {
 
             try {
-                Thread.sleep(i*1000);
+                Thread.sleep(i * 1000);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             try {
-                Thread.sleep(Long.parseLong(a)*1000);
+                Thread.sleep(Long.parseLong(a) * 1000);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -70,8 +68,37 @@ public class ProthyTest implements Runnable  {
 
         }
     }
-    public void run(){}
+
+    @RequestMapping(value = "/prothyGetRandom",method = RequestMethod.GET)
+    public String prothyGetRandom(){
+        Random random = new Random();
+        int i = random.nextInt(10);
+        try {
+            Thread.sleep(i * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
+        return "prothyGetRandom";
     }
+
+
+    @RequestMapping(value = "/prothyGetRequest",method = RequestMethod.GET)
+    public String prothyGetRequest(@RequestParam("RequestTime") String  RequestTime){
+        int i=Integer.valueOf(RequestTime);
+
+        try {
+            Thread.sleep(i * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return "prothyGetRequest";
+    }
+
+
+
+
+}
 
