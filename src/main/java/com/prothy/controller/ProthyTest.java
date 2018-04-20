@@ -9,7 +9,6 @@ import java.util.Random;
  * Created by dunana on 18/4/13.
  */
 @Controller
-@RequestMapping(value = "/test")
 public class ProthyTest implements Runnable {
 
     public ProthyTest() {
