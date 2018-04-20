@@ -42,14 +42,14 @@ public class ProthyTest implements Runnable {
         if (a == 0) {
 
             try {
-                Thread.sleep(i * 1000);
+                Thread.sleep(i );
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                Thread.sleep(a * 1000);
+                Thread.sleep(a);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
