@@ -18,39 +18,28 @@ public class ProthyTest implements Runnable {
     public void run() {
     }
 
-    @RequestMapping(value = "/prothy", method = RequestMethod.GET)
-    public String index() {
-
-        return "test";
-
-    }
+//    @RequestMapping(value = "/prothy", method = RequestMethod.GET)
+//    public String index() {
+//
+//        return "test";
+//
+//    }
 
     @RequestMapping(value = "/prothyTest", method = RequestMethod.POST)
-    public String prothyTest(@RequestParam("requestTime") String requestTime, @RequestParam("randomTime") String randomTime) {
-//
-//        String requestTime = request.getParameter("requestTime");
-//        String randomTime = request.getParameter("randomTime");
+    public void prothyTest(@RequestParam("requestTime") Integer requestTime) {
+
         ProthyTest prothyTest = new ProthyTest();
 
+        prothyTest.run(requestTime);
 
-        if (randomTime.equals("0")) {
-            prothyTest.run(randomTime);
-            return "third";
-
-        } else if (!requestTime.equals(0)) {
-            prothyTest.run(requestTime);
-            return "second";
-        }
-
-        return "";
     }
 
-    public void run(String a) {
+    public void run(int a) {
 
         Random random = new Random();
         int i = random.nextInt(10);
 
-        if (a.equals("0")) {
+        if (a == 0) {
 
             try {
                 Thread.sleep(i * 1000);
@@ -60,7 +49,7 @@ public class ProthyTest implements Runnable {
             }
         } else {
             try {
-                Thread.sleep(Long.parseLong(a) * 1000);
+                Thread.sleep(a * 1000);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -69,36 +58,55 @@ public class ProthyTest implements Runnable {
         }
     }
 
-    @RequestMapping(value = "/prothyGetRandom",method = RequestMethod.GET)
-    public String prothyGetRandom(){
-        Random random = new Random();
-        int i = random.nextInt(10);
-        try {
-            Thread.sleep(i * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        return "prothyGetRandom";
+    @RequestMapping(value = "/prothyGetRequest", method = RequestMethod.GET)
+    public void prothyGetRequest(@RequestParam("RequestTime") Integer RequestTime) {
+        ProthyTest prothyTest = new ProthyTest();
+        prothyTest.run(RequestTime);
     }
 
 
-    @RequestMapping(value = "/prothyGetRequest",method = RequestMethod.GET)
-    public String prothyGetRequest(@RequestParam("RequestTime") String  RequestTime){
-        int i=Integer.valueOf(RequestTime);
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public String test(
+            @RequestParam("FastCount") Integer FastCount,//快请求次数
+            @RequestParam("RequsetCount") Integer RequsetCount,//总请求次数
+            @RequestParam("RequestThreshold") Integer RequestThreshold,//阈值
+            @RequestParam("LastTime") Integer LastTime,//最大请求时间
+            @RequestParam("Post") Integer Post//Post=0 产生post请求；Post=1产生get请求
 
-        try {
-            Thread.sleep(i * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    ) {
+
+        ProthyTest prothyTest = new ProthyTest();
+
+        if (Post == 0) {
+            for (int i = 0; i <= RequsetCount; i++) {
+                if (i <= FastCount) {
+                    Random random = new Random();
+                    int fast = random.nextInt(RequestThreshold);
+                    prothyTest.prothyTest(fast);
+                } else {
+                    Random random = new Random();
+                    int slow = random.nextInt(LastTime) + RequestThreshold;
+                    prothyTest.prothyTest(slow);
+                }
+            }
+        } else if (Post == 1) {
+            for (int i = 0; i <= RequsetCount; i++) {
+                if (i <= FastCount) {
+                    Random random = new Random();
+                    int fast = random.nextInt(RequestThreshold);
+                    prothyTest.prothyGetRequest(fast);
+                } else {
+                    Random random = new Random();
+                    int slow = random.nextInt(LastTime) + RequestThreshold;
+                    prothyTest.prothyGetRequest(slow);
+                }
+
+
+            }
+
         }
+        return "main";
 
-        return "prothyGetRequest";
     }
-
-
-
-
 }
 
