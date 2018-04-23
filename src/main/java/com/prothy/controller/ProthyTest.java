@@ -65,7 +65,7 @@ public class ProthyTest implements Runnable {
     }
 
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String test(
             @RequestParam("FastCount") Integer FastCount,//快请求次数
             @RequestParam("RequsetCount") Integer RequsetCount,//总请求次数
@@ -77,7 +77,7 @@ public class ProthyTest implements Runnable {
 
         ProthyTest prothyTest = new ProthyTest();
 
-//        if (Post == 0) {
+//
             for (int i = 0; i <= RequsetCount; i++) {
                 if (i == FastCount) {
                     Random random = new Random();
@@ -112,7 +112,7 @@ public class ProthyTest implements Runnable {
 
 
 
-    @RequestMapping(value = "/testGet", method = RequestMethod.POST)
+    @RequestMapping(value = "/testGet", method = RequestMethod.GET)
     public String test2(
             @RequestParam("FastCount") Integer FastCount,//快请求次数
             @RequestParam("RequsetCount") Integer RequsetCount,//总请求次数
