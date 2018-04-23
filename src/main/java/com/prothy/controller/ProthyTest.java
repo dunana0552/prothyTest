@@ -79,27 +79,28 @@ public class ProthyTest implements Runnable {
 
         if (Post == 0) {
             for (int i = 0; i <= RequsetCount; i++) {
-                if (i <= FastCount) {
+//                if (i <= FastCount) {
                     Random random = new Random();
                     int fast = random.nextInt(RequestThreshold);
-                    prothyTest.prothyTest(fast);
-                } else {
-                    Random random = new Random();
-                    int slow = random.nextInt(LastTime) + RequestThreshold;
-                    prothyTest.prothyTest(slow);
-                }
+
+//                    prothyTest.prothyTest(fast);
+//                } else {
+//                    Random random = new Random();
+//                    int slow = random.nextInt(LastTime) + RequestThreshold;
+//                    prothyTest.prothyTest(slow);
+//                }
             }
         } else if (Post == 1) {
             for (int i = 0; i <= RequsetCount; i++) {
-                if (i <= FastCount) {
+//                if (i <= FastCount) {
                     Random random = new Random();
                     int fast = random.nextInt(RequestThreshold);
                     prothyTest.prothyGetRequest(fast);
-                } else {
-                    Random random = new Random();
-                    int slow = random.nextInt(LastTime) + RequestThreshold;
-                    prothyTest.prothyGetRequest(slow);
-                }
+//                } else {
+//                    Random random = new Random();
+//                    int slow = random.nextInt(LastTime) + RequestThreshold;
+//                    prothyTest.prothyGetRequest(slow);
+//                }
 
 
             }
