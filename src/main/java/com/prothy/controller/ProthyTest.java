@@ -65,19 +65,19 @@ public class ProthyTest implements Runnable {
     }
 
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(
             @RequestParam("FastCount") Integer FastCount,//快请求次数
             @RequestParam("RequsetCount") Integer RequsetCount,//总请求次数
             @RequestParam("RequestThreshold") Integer RequestThreshold,//阈值
-            @RequestParam("LastTime") Integer LastTime,//最大请求时间
-            @RequestParam("Post") Integer Post//Post=0 产生post请求；Post=1产生get请求
+            @RequestParam("LastTime") Integer LastTime//最大请求时间
+//            @RequestParam("Post") Integer Post//Post=0 产生post请求；Post=1产生get请求
 
     ) {
 
         ProthyTest prothyTest = new ProthyTest();
 
-        if (Post == 0) {
+//        if (Post == 0) {
             for (int i = 0; i <= RequsetCount; i++) {
                 if (i == FastCount) {
                     Random random = new Random();
@@ -90,24 +90,56 @@ public class ProthyTest implements Runnable {
                     prothyTest.prothyTest(slow);
                 }
             }
-        } else if (Post == 1) {
-            for (int i = 0; i <= RequsetCount; i++) {
-                if (i == FastCount) {
-                    Random random = new Random();
-                    int fast = random.nextInt(RequestThreshold);
-                    prothyTest.prothyGetRequest(fast);
-                } else {
-                    Random random = new Random();
-                    int slow = random.nextInt(LastTime) + RequestThreshold;
-                    prothyTest.prothyGetRequest(slow);
-                }
-
-
-            }
-
-        }
+//        } else if (Post == 1) {
+//            for (int i = 0; i <= RequsetCount; i++) {
+//                if (i == FastCount) {
+//                    Random random = new Random();
+//                    int fast = random.nextInt(RequestThreshold);
+//                    prothyTest.prothyGetRequest(fast);
+//                } else {
+//                    Random random = new Random();
+//                    int slow = random.nextInt(LastTime) + RequestThreshold;
+//                    prothyTest.prothyGetRequest(slow);
+//                }
+//
+//
+//            }
+//
+//        }
         return "main";
+    }
 
+
+
+
+    @RequestMapping(value = "/testGet", method = RequestMethod.POST)
+    public String test2(
+            @RequestParam("FastCount") Integer FastCount,//快请求次数
+            @RequestParam("RequsetCount") Integer RequsetCount,//总请求次数
+            @RequestParam("RequestThreshold") Integer RequestThreshold,//阈值
+            @RequestParam("LastTime") Integer LastTime//最大请求时间
+//            @RequestParam("Post") Integer Post//Post=0 产生post请求；Post=1产生get请求
+
+    ) {
+
+        ProthyTest prothyTest = new ProthyTest();
+
+//        if (Post == 0) {
+        for (int i = 0; i <= RequsetCount; i++) {
+            if (i == FastCount) {
+                Random random = new Random();
+                int fast = random.nextInt(RequestThreshold);
+
+                prothyTest.prothyTest(fast);
+            } else {
+                Random random = new Random();
+                int slow = random.nextInt(LastTime) + RequestThreshold;
+                prothyTest.prothyTest(slow);
+            }
+        }
+
+
+        return "main";
     }
 }
 
