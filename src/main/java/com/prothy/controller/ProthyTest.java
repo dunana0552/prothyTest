@@ -1,8 +1,10 @@
 package com.prothy.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.Random;
 
 /**
@@ -10,6 +12,9 @@ import java.util.Random;
  */
 @Controller
 public class ProthyTest implements Runnable {
+
+
+    private static final Logger LOG = LoggerFactory.getLogger(ProthyTest.class);
 
     public ProthyTest() {
 
@@ -71,6 +76,7 @@ public class ProthyTest implements Runnable {
             @RequestParam("RequsetCount") Integer RequsetCount,//总请求次数
             @RequestParam("RequestThreshold") Integer RequestThreshold,//阈值
             @RequestParam("LastTime") Integer LastTime//最大请求时间
+
 //            @RequestParam("Post") Integer Post//Post=0 产生post请求；Post=1产生get请求
 
     ) {
@@ -83,11 +89,15 @@ public class ProthyTest implements Runnable {
                     Random random = new Random();
                     int fast = random.nextInt(RequestThreshold);
 
+                    LOG.info("dunana    测试快请求响应时间"+fast);
+
                     prothyTest.prothyTest(fast);
+
                 } else {
                     Random random = new Random();
                     int slow = random.nextInt(LastTime) + RequestThreshold;
                     prothyTest.prothyTest(slow);
+                    LOG.info("dunana    测试慢请求响应时间"+slow);
                 }
             }
 //        } else if (Post == 1) {
