@@ -87,14 +87,14 @@ public class ProthyTest implements Runnable {
                 if (i == FastCount) {
                     Random random = new Random();
                     int fast = random.nextInt(RequestThreshold);
-                   System.out.println("测试快响应时间"+fast);
                     prothyTest.prothyTest(fast);
+                    System.out.println("测试快响应时间"+fast);
 
                 } else {
                     Random random = new Random();
                     int slow = random.nextInt(LastTime) + RequestThreshold;
-                    System.out.println("测试慢相应时间"+slow);
                     prothyTest.prothyTest(slow);
+                    System.out.println("测试慢相应时间"+slow);
 
                 }
             }
